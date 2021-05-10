@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <!-- Navbar -->
-    <Navbar @clickBtn="thisTextClicked"
+    <Navbar 
+    @clickMovie="changeGender"
+    @clickTv="changeGender"
+    @clickBtn="thisTextClicked"
     @keyUp="thisTextClicked"
     />
    <Col :filmsArray="films"/>
@@ -59,6 +62,12 @@ export default {
             this.search = 'all';
             this.getApi();
           }
+        },
+
+        changeGender(ele){
+          let urlCustom = `https://api.themoviedb.org/3/search/${ele}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
+          this.apiUrl = urlCustom
+          this.getApi();
         }
   
   },

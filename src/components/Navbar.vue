@@ -2,6 +2,12 @@
   <nav>
       <div class="logo">
           <img src="../assets/img/logoNetflix.png" alt="">
+          <div class="type">
+              <span @click="$emit('clickMovie','movie')"
+              >Films</span>
+              <span  @click="$emit('clickTv','tv')"
+              >Serie Tv</span>
+          </div>
       </div>
       <div class="search">
           <input @keyup="$emit('keyUp', searchText)"
@@ -37,12 +43,27 @@ nav{
     align-items: center;
     justify-content: space-between;
 
-    .logo img{
+    .logo{
+
+        display: flex;
+        align-items: center;
+
+        img{
         width: 150px;
         margin-top:5px ;
         margin-left: 10px;
+        margin-right: 40px;
     }
+       .type{
+           color: $text-primary;
 
+           span{
+               margin-right: 20px;
+               cursor: pointer;
+           }
+       }
+    } 
+    
     .search{
         margin-right: 50px;
 
