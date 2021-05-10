@@ -1,28 +1,90 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- Navbar -->
+    <Navbar @clickBtn="thisTextClicked"
+    @keyUp="thisTextClicked"
+    />
+   <Col :filmsArray="films"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Navbar from '@/components/Navbar.vue';
+import Col from '@/components/Col.vue';
+import axios from 'axios';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Navbar,
+    Col,
+  },
+  data(){
+    return {
+      apiUrl:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT',
+      films:[],
+      search:'all',
+      thisTextClick:'',
+    }
+  },
+  created(){
+    this.getApi();
+  },
+  updated(){
+    console.log(this.thisTextClick);
+  },
+  methods:{
+    // Api
+    getApi(){
+      axios.get(this.apiUrl, {
+    params: {
+      query: this.search,
+    }
+   })
+    .then((response) => {
+      // handle success
+      this.films = response.data.results;
+    })
+    .catch((error) => {
+      // handle error
+      console.log('Errore',error);
+    });
+        },
+        // search BAR
+        thisTextClicked(ele){
+          if(!ele == ''){
+            this.search = ele
+            this.getApi();
+          }else {
+            this.search = 'all';
+            this.getApi();
+          }
+        }
+  
+  },
+
 }
+
+
+
+
+
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import '@/style/vars';
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#app{
+  max-height: 100vh;
+  min-height: 100vh;
+  background: $bg-color;
+  padding:50px 10px 20px 10px;
+  overflow-Y:auto ;
 }
 </style>
