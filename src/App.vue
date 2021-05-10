@@ -7,6 +7,7 @@
     @clickBtn="thisTextClicked"
     @keyUp="thisTextClicked"
     />
+    <h1>{{ thisGenre }}</h1>
    <Col :genre="thisGenre"
    :filmsArray="films"/>
   </div>
@@ -71,14 +72,11 @@ export default {
           this.apiUrl = urlCustom
           this.thisGenre = ele
           this.getApi();
-        }
+        },
   
   },
 
 }
-
-
-
 
 
 </script>
@@ -98,5 +96,11 @@ export default {
   background: $bg-color;
   padding:50px 10px 20px 10px;
   overflow-Y:auto ;
+
+  h1{
+    color: $text-primary;
+    text-transform: capitalize;
+    margin-top: 10px;
+  }
 }
 </style>
