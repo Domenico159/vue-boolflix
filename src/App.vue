@@ -19,7 +19,6 @@
      :genre="thisGenre"
      :filmsArray="home1"/>
 
-   
    <Col 
     :genre="thisGenre"
    :filmsArray="home2"/>
@@ -176,7 +175,7 @@ export default {
             let urlCustom = `https://api.themoviedb.org/3/search/${ this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
             this.apiUrl = urlCustom
             this.getApi();
-            this.libreria = 'movie'
+            this.libreria = 'films'
             console.log(this.libreria);
 
           } else if(ele == 'serie-TV'){
