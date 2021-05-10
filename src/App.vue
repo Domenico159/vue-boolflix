@@ -4,12 +4,37 @@
     <Navbar 
     @clickMovie="changeGender"
     @clickTv="changeGender"
+    @clickHome="changeGender"
     @clickBtn="thisTextClicked"
     @keyUp="thisTextClicked"
     />
-    <h1>{{ thisGenre }}</h1>
-   <Col :genre="thisGenre"
+
+    <h1>{{ libreria }}</h1>
+
+   <Col v-if="libreria != 'home'" :genre="thisGenre"
    :filmsArray="films"/>
+
+   <div v-else class="home">
+     <Col 
+     :genre="thisGenre"
+     :filmsArray="home1"/>
+
+   
+   <Col 
+    :genre="thisGenre"
+   :filmsArray="home2"/>
+
+   <Col
+    :genre="thisGenre"
+   :filmsArray="home3"/>
+
+
+   <Col
+    :genre="thisGenre"
+   :filmsArray="home4"/>
+   </div>
+
+   
   </div>
 </template>
 
@@ -27,17 +52,30 @@ export default {
   data(){
     return {
       apiUrl:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT',
+      apiHome1:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=a&language=it-IT',
+      apiHome2:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=b&language=it-IT',
+      apiHome3:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=c&language=it-IT',
+      apiHome4:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=d&language=it-IT',
       films:[],
+      home1:[],
+      home2:[],
+      home3:[],
+      home4:[],
       search:'all',
       thisTextClick:'',
       thisGenre:'movie',
+      libreria:'home',
     }
   },
   created(){
     this.getApi();
+    this. getHome()
+    this. getHome1()
+    this. getHome2()
+    this. getHome3()
   },
   updated(){
-    console.log(this.thisTextClick);
+   console.log(this.home1);
   },
   methods:{
     // Api
@@ -56,6 +94,70 @@ export default {
       console.log('Errore',error);
     });
         },
+
+
+        getHome(){
+
+            axios.get(this.apiHome1)
+
+            .then( result => {
+                this.home1 = result.data.results
+                console.log(result.data.results);
+            })
+
+            .catch(err =>{
+                console.log(err);
+            })
+
+        },
+
+        getHome1(){
+
+            axios.get(this.apiHome2)
+
+            .then( result => {
+                this.home2 = result.data.results
+                console.log(result.data.results);
+            })
+
+            .catch(err =>{
+                console.log(err);
+            })
+
+        },
+
+        getHome2(){
+
+            axios.get(this.apiHome3)
+
+            .then( result => {
+                this.home3 = result.data.results
+                console.log(result.data.results);
+            })
+
+            .catch(err =>{
+                console.log(err);
+            })
+
+        },
+
+        getHome3(){
+
+            axios.get(this.apiHome4)
+
+            .then( result => {
+                this.home4 = result.data.results
+                console.log(result.data.results);
+            })
+
+            .catch(err =>{
+                console.log(err);
+            })
+
+        },
+
+
+
         // search BAR
         thisTextClicked(ele){
           if(!ele == ''){
@@ -68,10 +170,31 @@ export default {
         },
 
         changeGender(ele){
-          let urlCustom = `https://api.themoviedb.org/3/search/${ele}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
-          this.apiUrl = urlCustom
-          this.thisGenre = ele
-          this.getApi();
+
+          if(ele == 'movie'){
+            this.thisGenre = 'movie'
+            let urlCustom = `https://api.themoviedb.org/3/search/${ this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
+            this.apiUrl = urlCustom
+            this.getApi();
+            this.libreria = 'movie'
+            console.log(this.libreria);
+
+          } else if(ele == 'serie-TV'){
+            this.thisGenre = 'tv'
+            let urlCustom = `https://api.themoviedb.org/3/search/${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
+            this.apiUrl = urlCustom
+            this.getApi();
+            this.libreria = 'serie-TV'
+            console.log(this.libreria);
+
+          }else if (ele == 'home') {
+            this.thisGenre = 'movie'
+            let urlCustom = `https://api.themoviedb.org/3/search/${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
+            this.apiUrl = urlCustom
+            this.getApi();
+            this.libreria = 'home'
+            console.log(this.libreria);
+          }
         },
   
   },

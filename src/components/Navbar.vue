@@ -3,9 +3,11 @@
       <div class="logo">
           <img src="../assets/img/logoNetflix.png" alt="">
           <div class="type">
+              <span @click="$emit('clickHome','home')"
+              >Home</span>
               <span @click="$emit('clickMovie','movie')"
               >Films</span>
-              <span  @click="$emit('clickTv','tv')"
+              <span  @click="$emit('clickTv','serie-TV')"
               >Serie Tv</span>
           </div>
       </div>
