@@ -1,6 +1,7 @@
 <template>
   <div class="col">
-      <ul>
+      <!-- Movie -->
+      <ul v-if="genre == 'movie'">
           <li v-for="(ele,index) in filmsArray"
           :key="index">
               <img :src="`${urlImg}${ele.poster_path}`" alt="">
@@ -11,6 +12,27 @@
                   <img  class="lan-it" v-else-if="ele.original_language == 'it'" src="@/assets/img/flags-boolflix/it.png" alt="">
                   <h2 v-else>{{ele.original_language}}</h2>
                   <h2>{{ele.vote_average}}</h2>
+                  <i v-for="(e,index) in 5"
+                  :key="index"
+                  class="fas fa-star"></i>
+              </div>
+          </li>
+      </ul>
+      <!-- Serie tv -->
+        <ul v-if="genre == 'tv'">
+          <li v-for="(ele,index) in filmsArray"
+          :key="index">
+              <img :src="`${urlImg}${ele.poster_path}`" alt="">
+              <div class="overlay">
+                  <h2>{{ele.name}}</h2>
+                  <h2>{{ele.original_name}}</h2>
+                  <img class="lan-en" v-if="ele.original_language == 'en'" src="@/assets/img/flags-boolflix/en.png" alt="">
+                  <img  class="lan-it" v-else-if="ele.original_language == 'it'" src="@/assets/img/flags-boolflix/it.png" alt="">
+                  <h2 v-else>{{ele.original_language}}</h2>
+                  <h2>{{ele.vote_average}}</h2>
+                  <i v-for="(e,index) in 5"
+                  :key="index"
+                  class="fas fa-star"></i>
               </div>
           </li>
       </ul>

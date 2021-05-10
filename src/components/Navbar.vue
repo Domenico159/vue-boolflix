@@ -10,6 +10,7 @@
           </div>
       </div>
       <div class="search">
+          <span>Search:</span>
           <input @keyup="$emit('keyUp', searchText)"
           v-model="searchText" text="">
           <input @click="$emit('clickBtn', searchText)"
@@ -69,6 +70,11 @@ nav{
 
         .btn{
             margin-left: 20px;
+        }
+
+        span{
+            color: $text-primary;
+            margin-right: 10px;
         }
     }
 }
