@@ -20,7 +20,7 @@
 <script>
 export default {
     name:'Col',
-    props:['filmsArray'],
+    props:['filmsArray','genre'],
     data(){
         return {
             urlImg:'https://image.tmdb.org/t/p/w342',

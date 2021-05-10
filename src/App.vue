@@ -7,7 +7,8 @@
     @clickBtn="thisTextClicked"
     @keyUp="thisTextClicked"
     />
-   <Col :filmsArray="films"/>
+   <Col :genre="thisGenre"
+   :filmsArray="films"/>
   </div>
 </template>
 
@@ -28,6 +29,7 @@ export default {
       films:[],
       search:'all',
       thisTextClick:'',
+      thisGenre:'movie',
     }
   },
   created(){
@@ -67,6 +69,7 @@ export default {
         changeGender(ele){
           let urlCustom = `https://api.themoviedb.org/3/search/${ele}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
           this.apiUrl = urlCustom
+          this.thisGenre = ele
           this.getApi();
         }
   
