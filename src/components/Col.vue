@@ -27,6 +27,8 @@
                      <i :class="{adult:ele.adult}"
                      class="fas fa-user-circle"></i>
                  </div>
+                 <h2>Rilasciato il {{ ele.release_date }}</h2>
+                 <h2>Recensioni: {{ ele.popularity }}</h2>
                   </div>
                  <div class="descriptions">
                      <p>{{ ele.overview }}</p>
@@ -96,14 +98,16 @@ ul{
             max-height: 100%;
 
             .info{
-                min-height: 200px;
+                min-height: 250px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                padding-bottom: 10px;
+
             }
 
             .descriptions{
-                margin:20px ;
+                margin:30px 20px ;
             }
 
             .fas {
