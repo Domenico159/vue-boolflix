@@ -3,7 +3,7 @@
       <ul>
           <li v-for="(ele,index) in filmsArray"
           :key="index">
-              <img src="" alt="">
+              <img :src="`${urlImg}${ele.poster_path}`" alt="">
               <h1>{{ ele.original_title }}</h1>
               <p>{{ ele.overview}}</p>
           </li>
@@ -15,9 +15,11 @@
 export default {
     name:'Col',
     props:['filmsArray'],
-    updated(){
-        console.log(this.filmsArray);
-    }
+    data(){
+        return {
+            urlImg:'https://image.tmdb.org/t/p/w342',
+        }
+    },
 }
 </script>
 
@@ -36,6 +38,11 @@ ul{
         background: #ccc;
         height: 100%;
         min-width: 200px;
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
     }
 }
 
