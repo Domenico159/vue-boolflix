@@ -29,8 +29,9 @@ nav{
     position: fixed;
     height: 50px;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 10;
-    width: 100%;
     background: $bg-navbar;
     display: flex;
     align-items: center;

@@ -7,7 +7,9 @@
               <div class="overlay">
                   <h2>{{ele.title}}</h2>
                   <h2>{{ele.original_title}}</h2>
-                  <h2>{{ele.original_language}}</h2>
+                  <img class="lan-en" v-if="ele.original_language == 'en'" src="@/assets/img/flags-boolflix/en.png" alt="">
+                  <img  class="lan-it" v-else-if="ele.original_language == 'it'" src="@/assets/img/flags-boolflix/it.png" alt="">
+                  <h2 v-else>{{ele.original_language}}</h2>
                   <h2>{{ele.vote_average}}</h2>
               </div>
           </li>
@@ -22,6 +24,7 @@ export default {
     data(){
         return {
             urlImg:'https://image.tmdb.org/t/p/w342',
+            language:'',
         }
     },
 }
@@ -64,6 +67,15 @@ ul{
             h2{
                 font-size: 18px;
                 margin-bottom: 10px;
+            }
+            img.lan-en{
+                width: 30px;
+                height: 50px;
+                transform: rotate(90deg);
+            }
+            img.lan-it{
+                width: 50px;
+                height: 30px;
             }
         }
 
