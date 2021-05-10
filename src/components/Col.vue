@@ -12,16 +12,23 @@
                   <img class="lan-en" v-if="ele.original_language == 'en'" src="@/assets/img/flags-boolflix/en.png" alt="">
                   <img  class="lan-it" v-else-if="ele.original_language == 'it'" src="@/assets/img/flags-boolflix/it.png" alt="">
                   <h2 v-else>{{ele.original_language}}</h2>
-                  <h2>{{ele.vote_average}}</h2>
-                  <i 
+                 <div class="stars">
+                      <i 
                   v-for="(e,index) in 5"
                   :key="index"
-                  class="fas fa-star"></i>
+                  class="fas fa-star"
+                  :class="{ 'active' : index <  Math.floor(ele.vote_average / 2)}"
+                  ></i>
+                  <div class="overview">
+                  </div>
+                 </div>
+                  
+                  
               </div>
           </li>
       </ul>
       <!-- Serie tv -->
-        <ul v-if="genre == 'tv'">
+        <ul v-else>
           <li v-for="(ele,index) in filmsArray"
           :key="index">
               <img :src="`${urlImg}${ele.poster_path}`" alt="">
@@ -31,11 +38,14 @@
                   <img class="lan-en" v-if="ele.original_language == 'en'" src="@/assets/img/flags-boolflix/en.png" alt="">
                   <img  class="lan-it" v-else-if="ele.original_language == 'it'" src="@/assets/img/flags-boolflix/it.png" alt="">
                   <h2 v-else>{{ele.original_language}}</h2>
-                  <h2>{{ele.vote_average}}</h2>
-                  <i v-for="(e,index) in 5"
+                  <div class="stars">
+                      <i v-for="(e,index) in 5"
                   :key="index"
                   class="fas fa-star"
-                  :class="{active:index <= 5}"></i>
+                   :class="{ 'active' : index <  Math.floor(ele.vote_average / 2)}"
+                  >
+                  </i> 
+                  </div>
               </div>
           </li>
       </ul>
@@ -93,14 +103,14 @@ ul{
             visibility: hidden;
             color: $text-primary;
             padding: 10px;
-
-            i{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            .fas {
                 margin-right: 2px;
                 font-size: 24px;
-                
             }
-
-            i.active{
+            .fas.active{
                 color: yellow;
             }
 

@@ -11,7 +11,8 @@
       </div>
       <div class="search">
           <span>Search:</span>
-          <input @keyup="$emit('keyUp', searchText)"
+          <input placeholder="Search:"
+           @keyup="$emit('keyUp', searchText)"
           v-model="searchText" text="">
           <input @click="$emit('clickBtn', searchText)"
           class="btn" type="button" value="Cerca">
