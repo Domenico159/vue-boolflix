@@ -7,7 +7,8 @@
           :key="index">
               <img :src="`${urlImg}${ele.poster_path}`" alt="">
               <div class="overlay">
-                  <h2>{{genre == 'movie' ? ele.title : ele.name }}</h2>
+                  <div class="info">
+                      <h2>{{genre == 'movie' ? ele.title : ele.name }}</h2>
                   <h2>{{genre == 'movie' ? ele.original_title : ele.original_name }}</h2>
                   <img class="lan-en" v-if="ele.original_language == 'en'" src="@/assets/img/flags-boolflix/en.png" alt="">
                   <img  class="lan-it" v-else-if="ele.original_language == 'it'" src="@/assets/img/flags-boolflix/it.png" alt="">
@@ -26,6 +27,7 @@
                      <i :class="{adult:ele.adult}"
                      class="fas fa-user-circle"></i>
                  </div>
+                  </div>
                  <div class="descriptions">
                      <p>{{ ele.overview }}</p>
                  </div>
@@ -89,11 +91,16 @@ ul{
             padding: 10px;
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            overflow: auto;
+            overflow-y: auto;
             min-height: 100%;
-            flex-wrap: wrap;
+            max-height: 100%;
+
+            .info{
+                min-height: 200px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
 
             .descriptions{
                 margin:20px ;
@@ -105,9 +112,11 @@ ul{
             }
             .fas.active{
                 color: yellow;
+                margin: 10px 0;
             }
             .fa-user-circle{
                 color: rgb(81, 161, 27);
+                margin: 10px 0;
             }
             .fa-user-circle.adult{
                 color: rgb(161, 27, 27);
