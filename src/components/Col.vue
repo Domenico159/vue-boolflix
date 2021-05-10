@@ -26,6 +26,9 @@
                      <i :class="{adult:ele.adult}"
                      class="fas fa-user-circle"></i>
                  </div>
+                 <div class="descriptions">
+                     <p>{{ ele.overview }}</p>
+                 </div>
               </div>
           </li>
       </ul>
@@ -40,11 +43,12 @@ export default {
         return {
             urlImg:'https://image.tmdb.org/t/p/w342',
             language:'',
+            activeInfo:false,
         }
     },
     methods:{
-        colorStar(){
-            return true
+        activeInfoClick(){
+            this.activeInfo = ! this.activeInfo
         }
     },
 }
@@ -56,7 +60,7 @@ ul{
     display: flex;
     list-style: none;
     background: #fff;
-    height: 350px;
+    height: 400px;
     margin-top:30px ;
     overflow-X:auto ;
 
@@ -64,7 +68,7 @@ ul{
         margin-right: 10px;
         background: #ccc;
         max-height: 100%;
-        min-width: 200px;
+        min-width: 280px;
         position: relative;
         overflow: hidden;
         cursor: pointer;
@@ -87,6 +91,14 @@ ul{
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
+            overflow: auto;
+            min-height: 100%;
+            flex-wrap: wrap;
+
+            .descriptions{
+                margin:20px ;
+            }
+
             .fas {
                 margin-right: 2px;
                 font-size: 24px;
@@ -121,6 +133,7 @@ ul{
                 visibility: visible;
             }
     }
+
 }
 
 </style>
