@@ -225,13 +225,14 @@ nav{
 
            ul{
                position: absolute;
-               bottom: -250px;
+               bottom: -280px;
                right: 10px;
                list-style: none;
                display: flex;
                flex-direction: column;
                align-items: center;
                background: rgba($bg-color,0.9);
+               width: 180px;
                padding: 20px 5px;
                box-shadow: 5px 5px 15px #000;
 
@@ -242,6 +243,7 @@ nav{
 
                    span{
                        cursor: pointer;
+                       margin-bottom: 10px;
 
                        &:hover{
                            color: #0d7e80;
