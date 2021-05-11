@@ -12,8 +12,11 @@
           </div>
       </div>
       <div class="search">
-          <span>Search:</span>
-          <input placeholder="Search:"
+          <span><i @click="clickSearch"
+          class="fas fa-search"></i></span>
+          <input :class="{in:iconStatus, out:!iconStatus}"
+          class="text"
+           placeholder="Search:"
            @keyup="$emit('keyUp', searchText)"
           v-model="searchText" text="">
           <input @click="$emit('clickBtn', searchText)"
@@ -28,6 +31,12 @@ export default {
    data(){
        return {
            searchText:'',
+           iconStatus:false,
+       }
+   },
+   methods:{
+       clickSearch(){
+           this.iconStatus = !this.iconStatus
        }
    },
 }
@@ -71,13 +80,57 @@ nav{
     .search{
         margin-right: 50px;
 
+        .fa-search{
+            cursor: pointer;
+        }
+
         .btn{
             margin-left: 20px;
+            cursor: pointer;
         }
 
         span{
             color: $text-primary;
             margin-right: 10px;
+        }
+
+        .text{
+            background: transparent;
+            border:none;
+            border-bottom: 1px solid #ccc;
+            height: 30px;
+            width: 0px;
+            color: #fff;
+        }
+
+        .text.in{
+            animation: search-in 1s forwards;
+        }
+
+        .text.out{
+            animation: search-out 1s forwards;
+        }
+
+        @keyframes search-in {
+            0%{
+                width: 0px;
+            }
+
+            100%{
+                width: 200px;
+                padding: 5px 10px;
+            }
+        }
+
+         @keyframes search-out {
+            0%{
+                width: 200px;
+                padding: 5px 10px;
+            }
+
+            100%{
+               width: 0px;
+            }
         }
     }
 }
