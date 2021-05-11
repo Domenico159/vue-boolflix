@@ -10,9 +10,13 @@
     @clickList="changeGender"
     />
 
-    <div v-if="!myListActive" class="normal">
-      <h1>{{ libreria }}</h1>
+    <PreView @clickIconAdd="clickedAdd"
+     :genre="thisGenre"
+    :poster="thisPoster"
+     v-if="!myListActive"
+     />
 
+    <div v-if="!myListActive" class="normal">
    <Col @addFilm="addFilms"
    v-if="libreria != 'home'" :genre="thisGenre"
    :filmsArray="films"/>
@@ -20,20 +24,7 @@
    <div v-else class="home">
      <Col @addFilm="addFilms"
      :genre="thisGenre"
-     :filmsArray="home1"/>
-
-   <Col  @addFilm="addFilms"
-    :genre="thisGenre"
-   :filmsArray="home2"/>
-
-   <Col @addFilm="addFilms"
-    :genre="thisGenre"
-   :filmsArray="home3"/>
-
-
-   <Col @addFilm="addFilms"
-    :genre="thisGenre"
-   :filmsArray="home4"/>
+     :filmsArray="home"/>
    </div>
     </div>
 
@@ -57,6 +48,7 @@
 import Navbar from '@/components/Navbar.vue';
 import Col from '@/components/Col.vue';
 import Mylist from '@/components/Mylist.vue';
+import PreView from '@/components/PreView.vue';
 import axios from 'axios';
 
 export default {
@@ -65,36 +57,32 @@ export default {
     Navbar,
     Col,
     Mylist,
+    PreView,
   },
   data(){
     return {
       apiUrl:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT',
       apiHome1:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=a&language=it-IT',
-      apiHome2:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=b&language=it-IT',
-      apiHome3:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=c&language=it-IT',
-      apiHome4:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=d&language=it-IT',
+      apiSerie:'https://api.themoviedb.org/3/search/tv?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=all&language=it-IT',
       films:[],
-      home1:[],
-      home2:[],
-      home3:[],
-      home4:[],
+      home:[],
+      serie:[],
       myList:[],
       search:'all',
       thisTextClick:'',
       thisGenre:'movie',
       libreria:'home',
       myListActive:false,
+      thisPoster:{},
     }
   },
   created(){
     this.getApi();
     this. getHome()
-    this. getHome1()
-    this. getHome2()
-    this. getHome3()
+    this.getSerie()
   },
   updated(){
-
+   
   },
   methods:{
     // Api
@@ -120,7 +108,8 @@ export default {
             axios.get(this.apiHome1)
 
             .then( result => {
-                this.home1 = result.data.results
+                this.home = result.data.results
+                this.thisPoster = result.data.results[0]
             })
 
             .catch(err =>{
@@ -128,13 +117,12 @@ export default {
             })
 
         },
+        getSerie(){
 
-        getHome1(){
-
-            axios.get(this.apiHome2)
+            axios.get(this.apiSerie)
 
             .then( result => {
-                this.home2 = result.data.results
+                this.serie = result.data.results
             })
 
             .catch(err =>{
@@ -142,39 +130,13 @@ export default {
             })
 
         },
-
-        getHome2(){
-
-            axios.get(this.apiHome3)
-
-            .then( result => {
-                this.home3 = result.data.results
-            })
-
-            .catch(err =>{
-                console.log(err);
-            })
-
-        },
-
-        getHome3(){
-
-            axios.get(this.apiHome4)
-
-            .then( result => {
-                this.home4 = result.data.results
-            })
-
-            .catch(err =>{
-                console.log(err);
-            })
-
-        },
-        
-        addFilms(ele){
+        clickedAdd(ele){
           if(!this.myList.includes(ele)){
             this.myList.push(ele)
           }
+        },
+        addFilms(ele){
+          this.thisPoster = ele
         },
 
         removeListItem(index){
@@ -206,14 +168,18 @@ export default {
             this.getApi();
             this.libreria = 'films';
             this.myListActive = false;
+            this.thisPoster = this.films[0]
+            console.log('click film',this.films[0]);
 
           } else if(ele == 'serie-TV'){
             this.thisGenre = 'tv'
             let urlCustom = `https://api.themoviedb.org/3/search/${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
             this.apiUrl = urlCustom
             this.getApi();
+            this.getSerie();
             this.libreria = 'serie-TV';
             this.myListActive = false;
+            this.thisPoster = this.serie[0]
 
           }else if (ele == 'home') {
             this.thisGenre = 'movie'
@@ -222,6 +188,7 @@ export default {
             this.getApi();
             this.libreria = 'home';
             this.myListActive = false;
+            this.thisPoster = this.home[0]
           } else if (ele == 'list'){
             this.myListActive = !this.myListActive
           }
