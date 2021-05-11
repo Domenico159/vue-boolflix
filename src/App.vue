@@ -212,7 +212,7 @@ export default {
   max-height: 100vh;
   min-height: 100vh;
   background: $bg-color;
-  padding:50px 10px 20px 10px;
+  padding:80px 10px 20px 10px;
   overflow-Y:auto ;
 
   h1{
