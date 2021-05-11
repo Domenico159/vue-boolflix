@@ -9,8 +9,8 @@
               >Films</span>
               <span  @click="$emit('clickTv','serie-TV')"
               >Serie Tv</span>
-              <span>Nuovi e popolari</span>
-              <span>La mia lista</span>
+              <span  @click="$emit('clickList','list')"
+              >La mia lista</span>
           </div>
       </div>
       <div class="search">
@@ -115,12 +115,12 @@ nav{
                    
                    0%{
                        padding-bottom: 0px;
-                       border-color:red ;
+                       border-color:#db1927 ;
                    }
 
                    100%{
                        padding-bottom: 25px;
-                       border-color:red ;
+                       border-color:#db1927 ;
                    }
                }
            }

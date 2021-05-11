@@ -4,6 +4,7 @@
       <ul>
           <li
           v-for="(ele,index) in filmsArray"
+          @click="$emit('addFilm',ele)"
           :key="index">
               <img :src="`${urlImg}${ele.poster_path}`" alt="">
               <div class="overlay">
@@ -60,10 +61,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/style/vars';
+
 ul{
     display: flex;
     list-style: none;
-    background: #fff;
+    background: rgb(88, 88, 88);
     height: 400px;
     margin-top:30px ;
     overflow-X:auto ;

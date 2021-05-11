@@ -7,30 +7,45 @@
     @clickHome="changeGender"
     @clickBtn="thisTextClicked"
     @keyUp="thisTextClicked"
+    @clickList="changeGender"
     />
 
-    <h1>{{ libreria }}</h1>
+    <div v-if="!myListActive" class="normal">
+      <h1>{{ libreria }}</h1>
 
-   <Col v-if="libreria != 'home'" :genre="thisGenre"
+   <Col @addFilm="addFilms"
+   v-if="libreria != 'home'" :genre="thisGenre"
    :filmsArray="films"/>
 
    <div v-else class="home">
-     <Col 
+     <Col @addFilm="addFilms"
      :genre="thisGenre"
      :filmsArray="home1"/>
 
-   <Col 
+   <Col  @addFilm="addFilms"
     :genre="thisGenre"
    :filmsArray="home2"/>
 
-   <Col
+   <Col @addFilm="addFilms"
     :genre="thisGenre"
    :filmsArray="home3"/>
 
 
-   <Col
+   <Col @addFilm="addFilms"
     :genre="thisGenre"
    :filmsArray="home4"/>
+   </div>
+    </div>
+
+   <div v-else
+   class="myList">
+   <h1 v-if="!myList.length == 0"
+   >My list</h1>
+   <h1 v-else
+   >Non hai scelto dei film da salvare</h1>
+     <Col @addFilm="addFilms"
+     :genre="thisGenre"
+   :filmsArray="myList"/>
    </div>
 
    
@@ -60,10 +75,12 @@ export default {
       home2:[],
       home3:[],
       home4:[],
+      myList:[],
       search:'all',
       thisTextClick:'',
       thisGenre:'movie',
       libreria:'home',
+      myListActive:false,
     }
   },
   created(){
@@ -150,6 +167,12 @@ export default {
             })
 
         },
+        
+        addFilms(ele){
+          if(!this.myList.includes(ele)){
+            this.myList.push(ele)
+          }
+        },
 
 
 
@@ -174,21 +197,26 @@ export default {
             let urlCustom = `https://api.themoviedb.org/3/search/${ this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
             this.apiUrl = urlCustom
             this.getApi();
-            this.libreria = 'films'
+            this.libreria = 'films';
+            this.myListActive = false;
 
           } else if(ele == 'serie-TV'){
             this.thisGenre = 'tv'
             let urlCustom = `https://api.themoviedb.org/3/search/${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
             this.apiUrl = urlCustom
             this.getApi();
-            this.libreria = 'serie-TV'
+            this.libreria = 'serie-TV';
+            this.myListActive = false;
 
           }else if (ele == 'home') {
             this.thisGenre = 'movie'
             let urlCustom = `https://api.themoviedb.org/3/search/${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
             this.apiUrl = urlCustom
             this.getApi();
-            this.libreria = 'home'
+            this.libreria = 'home';
+            this.myListActive = false;
+          } else if (ele == 'list'){
+            this.myListActive = !this.myListActive
           }
         },
   
