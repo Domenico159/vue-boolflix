@@ -79,7 +79,7 @@ nav{
     left: 0;
     right: 0;
     z-index: 10;
-    background: rgba($bg-navbar,0.3);
+    background: rgba($bg-navbar,1);
     box-shadow: 10px 0px 10px #000;
     display: flex;
     align-items: center;
@@ -134,6 +134,7 @@ nav{
         span{
             color: $text-primary;
             margin-right: 10px;
+            transition: color 0.3s;
         }
 
         .text{
