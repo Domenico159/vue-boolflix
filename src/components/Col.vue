@@ -10,8 +10,8 @@
                   <div class="info">
                       <h2>{{genre == 'movie' ? ele.title : ele.name }}</h2>
                   <h2>{{genre == 'movie' ? ele.original_title : ele.original_name }}</h2>
-                  <img class="lan-en" v-if="ele.original_language == 'en'" src="@/assets/img/flags-boolflix/en.png" alt="">
-                  <img  class="lan-it" v-else-if="ele.original_language == 'it'" src="@/assets/img/flags-boolflix/it.png" alt="">
+                  <img  v-if="ele.original_language == 'en'" src="@/assets/img/flags-boolflix/en.png" alt="">
+                  <img  v-else-if="ele.original_language == 'it'" src="@/assets/img/flags-boolflix/it.png" alt="">
                   <h2 v-else>{{ele.original_language}}</h2>
                  <div class="stars">
                       <i 
@@ -130,16 +130,11 @@ ul{
                 font-size: 18px;
                 margin-bottom: 10px;
             }
-            img.lan-en{
-                width: 30px;
-                height: 50px;
-                transform: rotate(90deg);
-                margin-left: 10px;
-            }
-            img.lan-it{
+            img{
                 width: 50px;
                 height: 30px;
-            }
+                margin-left: 10px;
+                }
         }
 
         &:hover .overlay{
