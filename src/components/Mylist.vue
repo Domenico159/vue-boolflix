@@ -74,8 +74,8 @@ export default {
 
     .fa-minus-circle{
         position: absolute;
-        top:0px;
-        left: 5px;
+        top:5px;
+        left: 0px;
         color: rgb(202, 24, 24);
         z-index: 8;
         font-size: 22px;
