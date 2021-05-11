@@ -42,7 +42,7 @@
    <h1 v-if="!myList.length == 0"
    >My list</h1>
    <h1 v-else
-   >Non hai scelto dei film da salvare</h1>
+   >Non hai scelto film da salvare</h1>
      <Col @addFilm="addFilms"
      :genre="thisGenre"
    :filmsArray="myList"/>
