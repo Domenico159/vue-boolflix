@@ -25,9 +25,25 @@
               <i class="fas fa-bell"></i>
               <i class="fas fa-gift"></i>
           </div>
-          <div class="user">
+          <div @click="infoUser"
+          class="user">
           <img src="@/assets/img/Netflix-avatar.png" alt="">
-          <i class="fas fa-caret-down"></i>
+          <i :class="{in:clickInfoUser, out:!clickInfoUser}"
+          class="fas fa-caret-down"></i>
+          <ul v-if="clickInfoUser">
+              <li>
+                   <img src="@/assets/img/Netflix-avatar.png" alt="">
+                   <span>Domenico</span>
+              </li>
+              <li>
+                  <span>Gestisci i profili</span>
+              </li>
+              <li class="options">
+                  <span>Account</span>
+                  <span>Centro assistenza</span>
+                  <span>Esci da Netflix</span>
+              </li>
+          </ul>
       </div>
       </div>
   </nav>
@@ -40,11 +56,15 @@ export default {
        return {
            searchText:'',
            iconStatus:false,
+           clickInfoUser:false,
        }
    },
    methods:{
        clickSearch(){
            this.iconStatus = !this.iconStatus
+       },
+       infoUser(){
+           this.clickInfoUser = !this.clickInfoUser
        }
    },
 }
@@ -59,7 +79,8 @@ nav{
     left: 0;
     right: 0;
     z-index: 10;
-    background: $bg-navbar;
+    background: rgba($bg-navbar,0.3);
+    box-shadow: 10px 0px 10px #000;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -157,6 +178,8 @@ nav{
 
             display: flex;
             align-items: center;
+            position: relative;
+
             img{
                 width: 35px;
                 margin-left: 50px;
@@ -167,7 +190,78 @@ nav{
             i{
                 transform: translateY(2px);
                 cursor: pointer;
+               
             }
+
+            i.in{
+                 animation: clickInfo-in 0.5s forwards;
+            }
+
+            i.out{
+                 animation: clickInfo-out 0.5s forwards;
+            }
+
+            @keyframes clickInfo-in {
+                0%{
+                    transform: rotate(0);
+                }
+
+                100%{
+                    transform: rotate(-180deg);
+                }
+            }
+
+            @keyframes clickInfo-out {
+                0%{
+                    transform: rotate(-180deg);
+                }
+
+                100%{
+                    transform: rotate(0);
+                }
+            }
+
+           ul{
+               position: absolute;
+               bottom: -250px;
+               right: 10px;
+               list-style: none;
+               display: flex;
+               flex-direction: column;
+               align-items: center;
+               background: rgba($bg-color,0.9);
+               padding: 20px 5px;
+               box-shadow: 5px 5px 15px #000;
+
+               li{
+                   display: flex;
+                   margin-bottom: 15px;
+                   align-items: center;
+
+                   span{
+                       cursor: pointer;
+
+                       &:hover{
+                           color: #0d7e80;
+                       }
+                   }
+
+                   img{
+                       width: 35px;
+                       margin: 0 10px 0 0 ;
+                   }
+                   
+               }
+
+
+               li.options{
+                   flex-direction: column;
+                   padding-top: 30px;
+                   border-top:1px solid #ccc;
+                   align-items: flex-start;
+               }
+               
+           }
         }
 
     }
