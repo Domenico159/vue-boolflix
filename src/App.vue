@@ -43,7 +43,8 @@
    >La tua lista</h1>
    <h1 v-else
    >Non hai scelto film da salvare</h1>
-   <Mylist :genre="thisGenre"
+   <Mylist @removeItemList="removeListItem"
+   :genre="thisGenre"
    :listItem="myList"
    />
    </div>
@@ -174,6 +175,10 @@ export default {
           if(!this.myList.includes(ele)){
             this.myList.push(ele)
           }
+        },
+
+        removeListItem(index){
+          this.myList.splice(index,1)
         },
 
 

@@ -34,6 +34,9 @@
                  <div class="descriptions">
                      <p>{{ ele.overview }}</p>
                  </div>
+                 <div class="addListItem">
+                 <i class="fas fa-plus"></i><span>Aggiungi alla lista</span>
+                 </div>
               </div>
           </li>
       </ul>
@@ -46,7 +49,7 @@ export default {
     props:['filmsArray','genre'],
     data(){
         return {
-            urlImg:'https://image.tmdb.org/t/p/w342',
+            urlImg:'https://image.tmdb.org/t/p/original',
             language:'',
         }
     },
@@ -97,6 +100,22 @@ ul{
             overflow-y: auto;
             min-height: 100%;
             max-height: 100%;
+
+            .addListItem{
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 20px;
+
+                i{
+                    margin-right: 15px;
+                }
+            }
+
+            h2.addList{
+                margin-bottom: 30px;
+            }
 
             .info{
                 min-height: 250px;

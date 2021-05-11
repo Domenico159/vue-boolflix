@@ -1,10 +1,14 @@
 <template>
   <div class="myList">
 
-      <div v-for="(ele,index) in listItem"
-      :key="index"
-      class="box">
-       <img :src="`${urlImg}${ele.poster_path}`" alt="">
+      <div class="all-box" v-for="(ele,index) in listItem"
+      :key="index">
+       <div @click="$emit('removeItemList',index)"
+       class="remove">
+           <i class="fas fa-minus-circle"></i>
+       </div>
+      <div class="content box">
+           <img :src="`${urlImg}${ele.poster_path}`" alt="">
               <div class="overlay">
                   <div class="info">
                       <h2>{{genre == 'movie' ? ele.title : ele.name }}</h2>
@@ -34,6 +38,7 @@
                  </div>
               </div>
       </div>
+      </div>
 
   </div>
 </template>
@@ -45,7 +50,7 @@ export default {
     props:['listItem','genre'],
     data(){
         return {
-            urlImg:'https://image.tmdb.org/t/p/w342',
+            urlImg:'https://image.tmdb.org/t/p/original',
             language:'',
         }
     },
@@ -61,11 +66,26 @@ export default {
     min-height: 100vh;
     padding: 20px 10px;
 
+    .all-box{
+        position: relative;
+        max-width: calc(100% / 4 - 20px);
+     
+    }
+
+    .fa-minus-circle{
+        position: absolute;
+        top:0px;
+        left: 5px;
+        color: rgb(202, 24, 24);
+        z-index: 8;
+        font-size: 22px;
+        cursor: pointer;
+    }
+
     .box{
         background: #000;
         height: 500px;
-        width: calc(100% / 4 - 20px);
-        margin: 10px;
+        margin: 20px 10px;
         margin-right: 10px;
         background: #ccc;
         position: relative;
