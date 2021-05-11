@@ -209,6 +209,27 @@ export default {
   font-family: $main-font;
 }
 
+
+/* Custom scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgba(124, 124, 124,0.4);
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #dc1a28;
+    border-radius: 10px;
+  }
+
 #app{
   max-height: 100vh;
   min-height: 100vh;
