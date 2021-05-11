@@ -143,6 +143,7 @@ nav{
             border-bottom: 1px solid #ccc;
             height: 30px;
             width: 0px;
+            color: $text-primary;
         }
 
         .text.in{
