@@ -40,12 +40,12 @@
    <div v-else
    class="myList">
    <h1 v-if="!myList.length == 0"
-   >My list</h1>
+   >La tua lista</h1>
    <h1 v-else
    >Non hai scelto film da salvare</h1>
-     <Col @addFilm="addFilms"
-     :genre="thisGenre"
-   :filmsArray="myList"/>
+   <Mylist :genre="thisGenre"
+   :listItem="myList"
+   />
    </div>
 
    
@@ -55,6 +55,7 @@
 <script>
 import Navbar from '@/components/Navbar.vue';
 import Col from '@/components/Col.vue';
+import Mylist from '@/components/Mylist.vue';
 import axios from 'axios';
 
 export default {
@@ -62,6 +63,7 @@ export default {
   components: {
     Navbar,
     Col,
+    Mylist,
   },
   data(){
     return {

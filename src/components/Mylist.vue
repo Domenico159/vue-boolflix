@@ -1,12 +1,10 @@
 <template>
-  <div class="col">
-      <!-- Movie -->
-      <ul>
-          <li
-          v-for="(ele,index) in filmsArray"
-          @click="$emit('addFilm',ele)"
-          :key="index">
-              <img :src="`${urlImg}${ele.poster_path}`" alt="">
+  <div class="myList">
+
+      <div v-for="(ele,index) in listItem"
+      :key="index"
+      class="box">
+       <img :src="`${urlImg}${ele.poster_path}`" alt="">
               <div class="overlay">
                   <div class="info">
                       <h2>{{genre == 'movie' ? ele.title : ele.name }}</h2>
@@ -35,45 +33,41 @@
                      <p>{{ ele.overview }}</p>
                  </div>
               </div>
-          </li>
-      </ul>
+      </div>
+
   </div>
 </template>
 
 <script>
 export default {
-    name:'Col',
-    props:['filmsArray','genre'],
+
+    name:'Mylist',
+    props:['listItem','genre'],
     data(){
         return {
             urlImg:'https://image.tmdb.org/t/p/w342',
             language:'',
         }
     },
-    methods:{
-        activeInfoClick(){
-            this.activeInfo = ! this.activeInfo
-        }
-    },
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 @import '@/style/vars';
 
-ul{
+.myList{
     display: flex;
-    list-style: none;
-    background: rgb(88, 88, 88);
-    height: 400px;
-    margin-top:30px ;
-    overflow-X:auto ;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    padding: 20px 10px;
 
-    li{
+    .box{
+        background: #000;
+        height: 500px;
+        width: calc(100% / 4 - 20px);
+        margin: 10px;
         margin-right: 10px;
         background: #ccc;
-        max-height: 100%;
-        min-width: 280px;
         position: relative;
         overflow: hidden;
         cursor: pointer;
@@ -142,7 +136,6 @@ ul{
                 visibility: visible;
             }
     }
-
 }
 
 </style>
