@@ -74,7 +74,7 @@ export default {
     this. getHome3()
   },
   updated(){
-   console.log(this.home1);
+
   },
   methods:{
     // Api
@@ -101,7 +101,6 @@ export default {
 
             .then( result => {
                 this.home1 = result.data.results
-                console.log(result.data.results);
             })
 
             .catch(err =>{
@@ -116,7 +115,6 @@ export default {
 
             .then( result => {
                 this.home2 = result.data.results
-                console.log(result.data.results);
             })
 
             .catch(err =>{
@@ -131,7 +129,6 @@ export default {
 
             .then( result => {
                 this.home3 = result.data.results
-                console.log(result.data.results);
             })
 
             .catch(err =>{
@@ -146,7 +143,6 @@ export default {
 
             .then( result => {
                 this.home4 = result.data.results
-                console.log(result.data.results);
             })
 
             .catch(err =>{
@@ -162,6 +158,9 @@ export default {
           if(!ele == ''){
             this.search = ele
             this.getApi();
+            if(this.libreria == 'home'){
+               this.libreria = 'movie'
+            }
           }else {
             this.search = 'all';
             this.getApi();
@@ -176,7 +175,6 @@ export default {
             this.apiUrl = urlCustom
             this.getApi();
             this.libreria = 'films'
-            console.log(this.libreria);
 
           } else if(ele == 'serie-TV'){
             this.thisGenre = 'tv'
@@ -184,7 +182,6 @@ export default {
             this.apiUrl = urlCustom
             this.getApi();
             this.libreria = 'serie-TV'
-            console.log(this.libreria);
 
           }else if (ele == 'home') {
             this.thisGenre = 'movie'
@@ -192,7 +189,6 @@ export default {
             this.apiUrl = urlCustom
             this.getApi();
             this.libreria = 'home'
-            console.log(this.libreria);
           }
         },
   
