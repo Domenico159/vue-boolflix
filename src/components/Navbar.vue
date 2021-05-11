@@ -105,7 +105,26 @@ nav{
            span{
                margin-right: 20px;
                cursor: pointer;
+               border-bottom: 3px solid transparent;
+
+               &:hover{
+                   animation: border-in 0.6s forwards;
+               }
+
+               @keyframes border-in {
+                   
+                   0%{
+                       padding-bottom: 0px;
+                       border-color:red ;
+                   }
+
+                   100%{
+                       padding-bottom: 25px;
+                       border-color:red ;
+                   }
+               }
            }
+
        }
     } 
     

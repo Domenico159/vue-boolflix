@@ -226,7 +226,7 @@ export default {
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #dc1a28;
+    background: #0d7e80;
     border-radius: 10px;
   }
 
