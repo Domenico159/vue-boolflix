@@ -149,6 +149,8 @@ export default {
             this.getApi();
             this.myListActive = false;
             this.thisPoster = []
+            this.search = 'all'
+            this.getApi();
 
           } else if(ele == 'serie-TV'){
             this.thisGenre = 'tv'
@@ -158,6 +160,8 @@ export default {
             this.libreria = 'serie-TV';
             this.myListActive = false;
             this.thisPoster = []
+            this.search = 'all'
+            this.getApi();
           }else if (ele == 'home') {
             this.thisGenre = 'movie'
             let urlCustom = `https://api.themoviedb.org/3/search/${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
@@ -166,6 +170,8 @@ export default {
             this.libreria = 'home';
             this.myListActive = false;
             this.thisPoster = []
+            this.search = 'all'
+            this.getApi();
           } else if (ele == 'list'){
             this.myListActive = !this.myListActive
           }
