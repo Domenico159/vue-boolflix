@@ -1,5 +1,7 @@
 <template>
-  <nav>
+  <nav @mouseenter="navResIn"
+       @mouseleave="navResOut"
+  >
       <div class="logo">
           <img src="../assets/img/logoNetflix.png" alt="">
           <div class="type">
@@ -16,7 +18,7 @@
       <div class="search">
           <span><i @click="clickSearch"
           class="fas fa-search"></i></span>
-          <input :class="{in:iconStatus, out:!iconStatus}"
+          <input :class="{in:iconStatus, out:iconStatus == false}"
           class="text"
            placeholder="Search:"
            @keyup="$emit('keyUp', searchText)"
@@ -55,7 +57,7 @@ export default {
    data(){
        return {
            searchText:'',
-           iconStatus:false,
+           iconStatus:undefined,
            clickInfoUser:false,
        }
    },
@@ -65,7 +67,17 @@ export default {
        },
        infoUser(){
            this.clickInfoUser = !this.clickInfoUser
+       },
+       navResOut(){
+           if(this.iconStatus){
+               this.iconStatus = false
+               this.searchText = ''
+           }
+       },
+        navResIn(){
+           this.iconStatus = undefined
        }
+
    },
 }
 </script>

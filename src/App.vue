@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- Navbar -->
-    <Navbar 
+    <Navbar
     @clickMovie="changeGender"
     @clickTv="changeGender"
     @clickHome="changeGender"
@@ -129,6 +129,7 @@ export default {
           if(!ele == ''){
             this.search = ele
               this.getApi()
+              this.thisPoster = []
             if(this.libreria == 'home'){
                this.libreria = 'movie'
                this.thisPoster = []
@@ -170,7 +171,6 @@ export default {
           }
 
         },
-  
   },
 
 }
