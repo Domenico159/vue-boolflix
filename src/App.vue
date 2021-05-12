@@ -80,9 +80,6 @@ export default {
     this.getApi();
     this. getHome()
   },
-  updated(){
-    this.scrollPage()
-  },
   methods:{
     // Api
     getApi(){
@@ -180,12 +177,6 @@ export default {
             this.myListActive = true
           }
 
-        },
-
-        scrollPage(){
-          if(window.scrollY > 5){
-            console.log('Scroll');
-          }
         },
   },
 
