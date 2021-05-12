@@ -76,7 +76,7 @@ export default {
             display: flex;
             align-items:center ;
             position: absolute;
-            left: 250px;
+            left: 220px;
             top:130px;
 
             .fa-thumbs-up{
