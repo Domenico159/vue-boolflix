@@ -5,12 +5,13 @@
     @clickMovie="changeGender"
     @clickTv="changeGender"
     @clickHome="changeGender"
-    @clickBtn="thisTextClicked"
     @keyUp="thisTextClicked"
     @clickList="changeGender"
     />
 
-    <PreView @clickIconAdd="clickedAdd"
+    <PreView v-show=" thisPoster.length != 0 "
+    v-hide="thisPoster.length == 0"
+     @clickIconAdd="clickedAdd"
      :genre="thisGenre"
     :poster="thisPoster"
      v-if="!myListActive"
@@ -66,7 +67,6 @@ export default {
       apiSerie:'https://api.themoviedb.org/3/search/tv?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=all&language=it-IT',
       films:[],
       home:[],
-      serie:[],
       myList:[],
       search:'all',
       thisTextClick:'',
@@ -79,7 +79,6 @@ export default {
   created(){
     this.getApi();
     this. getHome()
-    this.getSerie()
   },
   methods:{
     // Api
@@ -106,20 +105,6 @@ export default {
 
             .then( result => {
                 this.home = result.data.results
-                this.thisPoster = this.home[0]
-            })
-
-            .catch(err =>{
-                console.log(err);
-            })
-
-        },
-        getSerie(){
-
-            axios.get(this.apiSerie)
-
-            .then( result => {
-                this.serie = result.data.results
             })
 
             .catch(err =>{
@@ -140,8 +125,6 @@ export default {
           this.myList.splice(index,1)
         },
 
-
-
         // search BAR
         thisTextClicked(ele){
           if(!ele == ''){
@@ -156,38 +139,22 @@ export default {
           }
         },
 
-        selectPoster(){
-          if(this.libreria == 'movie'){
-            this.thisPoster = this.films[0]
-
-          } else if(this.libreria == 'serie-TV'){
-            this.thisPoster = this.serie[0]
-
-          }else if (this.libreria == 'home') {
-            this.thisPoster = this.home[0]
-          }
-        },
-
         changeGender(ele){
           if(ele == 'movie'){
             this.libreria = 'films';
-            console.log('1',this.libreria);
             this.thisGenre = 'movie'
             let urlCustom = `https://api.themoviedb.org/3/search/${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
             this.apiUrl = urlCustom
             this.getApi();
             this.myListActive = false;
-            console.log('2',this.libreria);
 
           } else if(ele == 'serie-TV'){
             this.thisGenre = 'tv'
             let urlCustom = `https://api.themoviedb.org/3/search/${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
             this.apiUrl = urlCustom
-            this.getSerie();
+            this.getApi()
             this.libreria = 'serie-TV';
             this.myListActive = false;
-            this.films = this.serie
-
           }else if (ele == 'home') {
             this.thisGenre = 'movie'
             let urlCustom = `https://api.themoviedb.org/3/search/${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
@@ -199,7 +166,6 @@ export default {
             this.myListActive = !this.myListActive
           }
 
-          this.selectPoster()
         },
   
   },
