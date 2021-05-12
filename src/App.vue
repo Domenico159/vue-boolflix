@@ -81,9 +81,6 @@ export default {
     this. getHome()
     this.getSerie()
   },
-  updated(){
-    this.selectPoster()
-  },
   methods:{
     // Api
     getApi(){
@@ -181,7 +178,6 @@ export default {
             this.getApi();
             this.myListActive = false;
             console.log('2',this.libreria);
-            this.thisPoster = this.films[0]
 
           } else if(ele == 'serie-TV'){
             this.thisGenre = 'tv'
@@ -202,6 +198,8 @@ export default {
           } else if (ele == 'list'){
             this.myListActive = !this.myListActive
           }
+
+          this.selectPoster()
         },
   
   },
