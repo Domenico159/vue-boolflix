@@ -9,6 +9,9 @@
     @clickList="changeGender"
     />
 
+    <h1  v-hide="thisPoster.length != 0"
+    v-show="thisPoster.length == 0"
+    >Scegli un album</h1>
     <PreView v-show=" thisPoster.length != 0 "
     v-hide="thisPoster.length == 0"
      @clickIconAdd="clickedAdd"
