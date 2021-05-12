@@ -9,8 +9,9 @@
     @clickList="changeGender"
     />
 
-    <h1  v-hide="thisPoster.length != 0"
-    v-show="thisPoster.length == 0"
+    <h1  
+    v-hide="thisPoster.length != 0"
+    v-show="thisPoster.length == 0 && myListActive == false"
     >Scegli un album</h1>
     <PreView v-show=" thisPoster.length != 0 "
     v-hide="thisPoster.length == 0"
@@ -176,7 +177,7 @@ export default {
             this.search = 'all'
             this.getApi();
           } else if (ele == 'list'){
-            this.myListActive = !this.myListActive
+            this.myListActive = true
           }
 
         },
