@@ -73,7 +73,7 @@ export default {
       thisGenre:'movie',
       libreria:'home',
       myListActive:false,
-      thisPoster:{},
+      thisPoster:[],
     }
   },
   created(){
@@ -95,6 +95,7 @@ export default {
     .then((response) => {
       // handle success
       this.films = response.data.results;
+      this.thisPoster = this.films[0]
     })
     .catch((error) => {
       // handle error
@@ -162,6 +163,7 @@ export default {
 
         changeGender(ele){
           if(ele == 'movie'){
+            this.thisPoster = this.films[0]
             this.thisGenre = 'movie'
             let urlCustom = `https://api.themoviedb.org/3/search//${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
             this.apiUrl = urlCustom
