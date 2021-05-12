@@ -32,6 +32,10 @@
                  class="addListItem">
                  <i class="fas fa-plus"></i><span>Aggiungi alla lista</span>
                  </div>
+                 <div class="like">
+                     <i class="fas fa-thumbs-up"></i>
+                     <i class="fas fa-thumbs-down"></i>
+                 </div>
       </div>
       <div class="imgPoster">
            <img :src="`${urlImg}${poster.poster_path}`" alt="">
@@ -67,6 +71,28 @@ export default {
         width: 50%;
         position: relative;
         overflow-y: auto;
+
+        .like{
+            display: flex;
+            align-items:center ;
+            position: absolute;
+            left: 250px;
+            top:130px;
+
+            .fa-thumbs-up{
+                color: rgb(15, 172, 15);
+                
+            }
+
+            .fa-thumbs-down{
+                color:#db1927 ;
+            }
+            i{
+                margin-right: 30px;
+                font-size: 24px;
+                cursor: pointer;
+            }
+        }
 
         .recensioni{
             display: flex;
@@ -121,7 +147,7 @@ export default {
                 margin: 10px 0;
             }
             .fa-user-circle{
-                color: rgb(81, 161, 27);
+                color: rgb(15, 172, 15);
                 margin: 10px 0;
                 position: absolute;
                 right: 20px;
