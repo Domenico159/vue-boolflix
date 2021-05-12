@@ -69,7 +69,6 @@ export default {
       home:[],
       myList:[],
       search:'all',
-      thisTextClick:'',
       thisGenre:'movie',
       libreria:'home',
       myListActive:false,
@@ -132,6 +131,7 @@ export default {
               this.getApi()
             if(this.libreria == 'home'){
                this.libreria = 'movie'
+               this.thisPoster = []
             }
           }else {
             this.search = 'all';
