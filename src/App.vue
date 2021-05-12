@@ -82,7 +82,7 @@ export default {
     this.getSerie()
   },
   updated(){
-   
+ 
   },
   methods:{
     // Api
@@ -109,7 +109,8 @@ export default {
 
             .then( result => {
                 this.home = result.data.results
-                this.thisPoster = result.data.results[0]
+
+                this.thisPoster = this.home[0]
             })
 
             .catch(err =>{
@@ -149,7 +150,7 @@ export default {
         thisTextClicked(ele){
           if(!ele == ''){
             this.search = ele
-            this.getApi();
+              this.getApi()
             if(this.libreria == 'home'){
                this.libreria = 'movie'
             }
@@ -160,25 +161,22 @@ export default {
         },
 
         changeGender(ele){
-
           if(ele == 'movie'){
             this.thisGenre = 'movie'
-            let urlCustom = `https://api.themoviedb.org/3/search/${ this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
+            let urlCustom = `https://api.themoviedb.org/3/search//${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
             this.apiUrl = urlCustom
             this.getApi();
             this.libreria = 'films';
             this.myListActive = false;
-            this.thisPoster = this.films[0]
-            console.log('click film',this.films[0]);
 
           } else if(ele == 'serie-TV'){
             this.thisGenre = 'tv'
             let urlCustom = `https://api.themoviedb.org/3/search/${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
             this.apiUrl = urlCustom
-            this.getApi();
             this.getSerie();
             this.libreria = 'serie-TV';
             this.myListActive = false;
+            this.films = this.serie
             this.thisPoster = this.serie[0]
 
           }else if (ele == 'home') {
@@ -236,8 +234,9 @@ export default {
   max-height: 100vh;
   min-height: 100vh;
   background: $bg-color;
-  padding:80px 10px 20px 10px;
-  overflow-Y:auto ;
+  padding:80px 10px 50px 10px;
+  overflow-X: hidden;
+  overflow-Y: auto;
 
   h1{
     color: $text-primary;

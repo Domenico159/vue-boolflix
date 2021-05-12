@@ -2,8 +2,8 @@
   <div class="pre-view">
       <div class="text">
           <div class="info">
-                  <h2>Titolo : {{genre == 'movie' ? poster.title : poster.name }}</h2>
-                  <h2>Titolo originale : {{genre == 'movie' ? poster.original_title : poster.original_name }}</h2>
+                  <h1>{{genre == 'movie' ? poster.title : poster.name }}</h1>
+                  <h2>{{genre == 'movie' ? poster.original_title : poster.original_name }}</h2>
                   <img  v-if="poster.original_language == 'en'" src="@/assets/img/flags-boolflix/en.png" alt="">
                   <img  v-else-if="poster.original_language == 'it'" src="@/assets/img/flags-boolflix/it.png" alt="">
                   <h2 v-else>Lingua : {{poster.original_language}}</h2>
@@ -55,24 +55,31 @@ export default {
 <style scoped lang="scss">
 @import '@/style/vars';
 .pre-view{
-    min-height: 60vh;
-    max-height: 60vh;
+    min-height: 70vh;
+    max-height: 70vh;
     overflow: hidden;
     display: flex;
-    justify-content: space-between;
-    padding: 5px;
+    justify-content: space-around;
+    padding: 20px 5px 5px 5px;
 
     .text{
         color:$text-primary;
         width: 50%;
         position: relative;
+        overflow-y: auto;
+
+        h1{
+            margin-bottom: 10px;
+        }
+
+        
 
         .addListItem{
             position: absolute;
             display: flex;
             align-items: center;
-            right: 0;
-            top: 20px;
+            right: 50px;
+            top: 100px;
 
             i{
                 margin-right: 15px;
@@ -121,15 +128,18 @@ export default {
                 }
     }
     .imgPoster{
-        width: 500px;
+        width: 300px;
         max-height: 100%;
         padding-bottom: 5px;
+        overflow: hidden;
+        border-radius: 20px;
 
         img{
             width: 100%;
-            height: 100%;
+            height: auto;
             max-height: 100%;
             object-fit: cover;
+            border-radius: 20px;
         }
     }
 }

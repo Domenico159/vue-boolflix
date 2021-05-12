@@ -35,29 +35,35 @@ export default {
 ul{
     display: flex;
     list-style: none;
-    background: rgb(88, 88, 88);
-    height: 200px;
-    max-height: 200px;
-    margin-top: 10px;
-    overflow-X:auto ;
+    min-height: 350px;
+    max-height: 350px;
+    margin-top: 30px;
+    overflow-x: auto;
+    align-items: center;
+   
 
     li{
-        background: #ccc;
-        max-height: 100%;
-        min-width: 200px;
-        max-width: 200px;
+        min-width: calc(100% / 8 - 10px);
         position: relative;
-        overflow: hidden;
         cursor: pointer;
+        margin: 20px 5px;
+        height: 220px;
+       
 
         &:hover img{
-            transform: scale(1.2);
+            position: relative;
+            transform: scale(1.4);
+            z-index: 9;
+            height: auto;
+            
+            
         }
         img{
             max-height: 100%;
             width: 100%;
             object-fit: cover;
-             transition: transform 0.3s;
+             transition: all 0.3s;
+              border-radius: 20%;
         }
     }
 

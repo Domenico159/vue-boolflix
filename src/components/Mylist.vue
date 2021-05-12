@@ -103,7 +103,7 @@ export default {
             right: 0;
             bottom: 0;
             background: rgba(0,0,0,0.8);
-            visibility: hidden;
+            opacity: 0;
             color: $text-primary;
             padding: 10px;
             display: flex;
@@ -111,6 +111,7 @@ export default {
             overflow-y: auto;
             min-height: 100%;
             max-height: 100%;
+            transition: opacity 0.3s;
 
             .info{
                 min-height: 250px;
@@ -150,10 +151,11 @@ export default {
                 height: 30px;
                 margin-left: 10px;
                 }
+
         }
 
         &:hover .overlay{
-                visibility: visible;
+                opacity: 1;
             }
     }
 }
