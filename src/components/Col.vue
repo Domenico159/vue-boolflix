@@ -44,6 +44,7 @@ ul{
 
     li{
         min-width: calc(100% / 8 - 10px);
+        max-width: calc(100% / 8 - 10px);
         position: relative;
         cursor: pointer;
         margin: 20px 5px;

@@ -82,7 +82,7 @@ export default {
     this.getSerie()
   },
   updated(){
- 
+    this.selectPoster()
   },
   methods:{
     // Api
@@ -95,11 +95,10 @@ export default {
     .then((response) => {
       // handle success
       this.films = response.data.results;
-      this.thisPoster = this.films[0]
     })
     .catch((error) => {
       // handle error
-      console.log('Errore',error);
+      console.log('Errore 1',error);
     });
         },
 
@@ -110,7 +109,6 @@ export default {
 
             .then( result => {
                 this.home = result.data.results
-
                 this.thisPoster = this.home[0]
             })
 
@@ -161,15 +159,29 @@ export default {
           }
         },
 
+        selectPoster(){
+          if(this.libreria == 'movie'){
+            this.thisPoster = this.films[0]
+
+          } else if(this.libreria == 'serie-TV'){
+            this.thisPoster = this.serie[0]
+
+          }else if (this.libreria == 'home') {
+            this.thisPoster = this.home[0]
+          }
+        },
+
         changeGender(ele){
           if(ele == 'movie'){
-            this.thisPoster = this.films[0]
+            this.libreria = 'films';
+            console.log('1',this.libreria);
             this.thisGenre = 'movie'
-            let urlCustom = `https://api.themoviedb.org/3/search//${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
+            let urlCustom = `https://api.themoviedb.org/3/search/${this.thisGenre}?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT`;
             this.apiUrl = urlCustom
             this.getApi();
-            this.libreria = 'films';
             this.myListActive = false;
+            console.log('2',this.libreria);
+            this.thisPoster = this.films[0]
 
           } else if(ele == 'serie-TV'){
             this.thisGenre = 'tv'
@@ -179,7 +191,6 @@ export default {
             this.libreria = 'serie-TV';
             this.myListActive = false;
             this.films = this.serie
-            this.thisPoster = this.serie[0]
 
           }else if (ele == 'home') {
             this.thisGenre = 'movie'
@@ -188,7 +199,6 @@ export default {
             this.getApi();
             this.libreria = 'home';
             this.myListActive = false;
-            this.thisPoster = this.home[0]
           } else if (ele == 'list'){
             this.myListActive = !this.myListActive
           }
