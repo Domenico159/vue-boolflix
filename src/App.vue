@@ -10,11 +10,9 @@
     />
 
     <h1  
-    v-hide="thisPoster.length != 0"
     v-show="thisPoster.length == 0 && myListActive == false"
     >Scegli un album</h1>
     <PreView v-show=" thisPoster.length != 0 "
-    v-hide="thisPoster.length == 0"
      @clickIconAdd="clickedAdd"
      :genre="thisGenre"
     :poster="thisPoster"
@@ -25,7 +23,6 @@
    <Col @addFilm="addFilms"
    v-if="libreria != 'home'" :genre="thisGenre"
    :filmsArray="films"/>
-
    <div v-else class="home">
      <Col @addFilm="addFilms"
      :genre="thisGenre"
@@ -82,6 +79,9 @@ export default {
   created(){
     this.getApi();
     this. getHome()
+  },
+  updated(){
+    this.scrollPage()
   },
   methods:{
     // Api
@@ -180,6 +180,12 @@ export default {
             this.myListActive = true
           }
 
+        },
+
+        scrollPage(){
+          if(window.scrollY > 5){
+            console.log('Scroll');
+          }
         },
   },
 
