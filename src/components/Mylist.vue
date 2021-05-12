@@ -128,10 +128,10 @@ export default {
 
             .fas {
                 margin-right: 2px;
-                font-size: 24px;
+                font-size: 22px;
             }
             .fas.active{
-                color: yellow;
+                color: #db1927;
                 margin: 10px 0;
             }
             .fa-user-circle{

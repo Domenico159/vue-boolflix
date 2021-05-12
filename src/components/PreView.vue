@@ -7,26 +7,26 @@
                   <img  v-if="poster.original_language == 'en'" src="@/assets/img/flags-boolflix/en.png" alt="">
                   <img  v-else-if="poster.original_language == 'it'" src="@/assets/img/flags-boolflix/it.png" alt="">
                   <h2 v-else>Lingua : {{poster.original_language}}</h2>
-                 <div class="stars">
+                 <div class="recensioni">
+                     <div class="stars">
                       <i 
                   v-for="(e,index) in 5"
                   :key="index"
                   class="fas fa-star"
                   :class="{ 'active' : index <  Math.floor(poster.vote_average / 2)}"
                   ></i>
-                  <div class="overview">
-                  </div>
+                 </div>
+                  <h2>{{ poster.popularity }}</h2>
                  </div>
                  <div class="adult-or-child">
                      <i :class="{adult:poster.adult}"
                      class="fas fa-user-circle"></i>
                  </div>
-                 <h2>Rilasciato il : {{ poster.release_date }}</h2>
-                 <h2>Recensioni: {{ poster.popularity }}</h2>
-                  </div>
+                 <h2>{{ poster.release_date }}</h2>
                  <div class="descriptions">
                      <p>{{ poster.overview }}</p>
                  </div>
+                  </div>
                  <div 
                  @click="$emit('clickIconAdd',poster)"
                  class="addListItem">
@@ -68,6 +68,17 @@ export default {
         position: relative;
         overflow-y: auto;
 
+        .recensioni{
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+
+            h2{
+                transform: translateY(10px);
+                margin-left: 15px;
+            }
+        }
+
         h1{
             margin-bottom: 10px;
         }
@@ -103,15 +114,19 @@ export default {
 
             .fas {
                 margin-right: 2px;
-                font-size: 24px;
+                font-size: 20px;
             }
             .fas.active{
-                color: yellow;
+                color: #db1927;
                 margin: 10px 0;
             }
             .fa-user-circle{
                 color: rgb(81, 161, 27);
                 margin: 10px 0;
+                position: absolute;
+                right: 20px;
+                top: 10px;
+                font-size: 28px;
             }
             .fa-user-circle.adult{
                 color: rgb(161, 27, 27);
