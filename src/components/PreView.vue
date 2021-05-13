@@ -30,7 +30,8 @@
                  class="addText">Aggiunto</span>
                  </div>
                  </div>
-                 <h2 class="mediaType">{{ poster.media_type }}</h2>
+                 <h2 v-if="genre != 'home'" class="mediaType">{{ genre }}</h2>
+                 <h2 v-else class="mediaType">{{ poster.media_type }}</h2>
                  <div class="adult-or-child">
                      <i :class="{adult:poster.adult}"
                      class="fas fa-user-circle"></i>

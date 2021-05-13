@@ -65,7 +65,7 @@ export default {
   data(){
     return {
       apiUrl:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT',
-      apiHome1:'https://api.themoviedb.org/3/trending/all/day?api_key=6425bcca50e476d0d6befdd1409e6aa5',
+      apiHome1:'https://api.themoviedb.org/3/trending/all/day?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT',
       apiSerie:'https://api.themoviedb.org/3/search/tv?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=all&language=it-IT',
       films:[],
       home:[],
