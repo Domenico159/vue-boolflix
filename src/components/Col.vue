@@ -5,7 +5,8 @@
           <li @click="$emit('addFilm',ele)"
           v-for="(ele,index) in filmsArray"
           :key="index">
-              <img v-if="ele.poster_path != undefined" :src="`${urlImg}${ele.poster_path}`" alt="">
+              <img v-if="ele.backdrop_path != undefined" :src="`${urlImg}${ele.backdrop_path}`" alt="">
+              <img v-else-if="ele.poster_path != undefined" :src="`${urlImg}${ele.poster_path}`" alt="">
               <img v-else src="@/assets/img/poster-placeholder.png" alt="">
           </li>
       </ul>
@@ -40,12 +41,12 @@ ul{
     max-height: 350px;
     margin-top: 30px;
     overflow-x: auto;
-    align-items: center;
+   align-items: center;
    padding: 0px 20px;
 
     li{
-        min-width: calc(100% / 8 - 10px);
-        max-width: calc(100% / 8 - 10px);
+        min-width: calc(100% / 4 - 10px);
+        max-width: calc(100% / 4 - 10px);
         position: relative;
         cursor: pointer;
         margin: 20px 5px;
@@ -54,7 +55,7 @@ ul{
 
         &:hover img{
             position: relative;
-            transform: scale(1.4);
+            transform: scale(1.3);
             z-index: 9;
             height: auto;
             

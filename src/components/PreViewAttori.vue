@@ -11,7 +11,7 @@
       <div class="colAttori">
 
            <ul>
-          <li @click="addPoster"
+          <li @click="addPoster(ele)"
           v-for="(ele,index) in poster.known_for"
           :key="index">
               <img v-if="ele.poster_path != undefined" :src="`${urlImg}${ele.backdrop_path}`" alt="">
@@ -21,6 +21,7 @@
       </div>
 
       <PreViewFilmAttori v-if=" thisPoster.length != 0 "
+    :poster="thisPoster"
      />
 
 
@@ -46,6 +47,7 @@ export default {
     methods:{
         addPoster(ele){
             this.thisPoster = ele
+            console.log(ele);
         }
     },
 }
