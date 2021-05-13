@@ -2,15 +2,12 @@
   <div id="app">
     <!-- Navbar -->
     <Navbar
-    @clickMovie="changeGender"
-    @clickTv="changeGender"
-    @clickHome="changeGender"
     @keyUp="thisTextClicked"
-    @clickList="changeGender"
+    @clickNav="changeGender"
     />
 
     <h1  
-    v-show="thisPoster.length == 0 && myListActive == false"
+    v-show="thisPoster.length == 0 && myListActive == false && thisPosterActor.length == 0"
     >Scegli un album</h1>
     <PreView v-show=" thisPoster.length != 0 "
      @clickIconAdd="clickedAdd"
@@ -20,7 +17,26 @@
      v-if="!myListActive"
      />
 
-    <div v-if="!myListActive" class="normal">
+
+     <div v-show="thisGenre == 'attori'" class="attori">
+       <ColAttori  @addActor="actorsAdd"
+     :genre="thisGenre"
+     :filmsArray="attoriArray"/>
+     </div>
+
+     <PreViewAttori v-show=" thisPoster.length == 0 && thisPosterActor.length != 0 && thisGenre == 'attori' "
+     @clickIconAdd="clickedAdd"
+     :genre="thisGenre"
+     :effectAdd="statusEffectAdd"
+    :poster="thisPosterActor"
+     v-if="!myListActive"
+     />
+
+
+     <div v-if="thisGenre != 'attori'"
+     class="attoriActived">
+        <div 
+    v-if="!myListActive" class="normal">
    <Col @addFilm="addFilms"
    v-if="libreria != 'home'" :genre="thisGenre"
    :filmsArray="films"/>
@@ -42,6 +58,9 @@
    :listItem="myList"
    />
    </div>
+     </div>
+
+   
 
    
   </div>
@@ -52,6 +71,8 @@ import Navbar from '@/components/Navbar.vue';
 import Col from '@/components/Col.vue';
 import Mylist from '@/components/Mylist.vue';
 import PreView from '@/components/PreView.vue';
+import ColAttori from '@/components/ColAttori.vue';
+import PreViewAttori from '@/components/PreViewAttori.vue';
 import axios from 'axios';
 
 export default {
@@ -61,14 +82,18 @@ export default {
     Col,
     Mylist,
     PreView,
+    ColAttori,
+    PreViewAttori,
   },
   data(){
     return {
       apiUrl:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT',
       apiHome1:'https://api.themoviedb.org/3/trending/all/day?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT',
       apiSerie:'https://api.themoviedb.org/3/search/tv?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=all&language=it-IT',
+      apiAttori:'https://api.themoviedb.org/3/trending/person/day?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT',
       films:[],
       home:[],
+      attoriArray:[],
       myList:[],
       search:'all',
       thisGenre:'movie',
@@ -76,11 +101,13 @@ export default {
       myListActive:false,
       thisPoster:[],
       statusEffectAdd:false,
+      thisPosterActor:[],
     }
   },
   created(){
     this.getApi();
     this. getHome()
+    this. getAttori()
   },
   methods:{
     // Api
@@ -113,6 +140,24 @@ export default {
                 console.log(err);
             })
 
+        },
+
+        getAttori(){
+
+            axios.get(this.apiAttori)
+
+            .then( result => {
+                this.attoriArray = result.data.results
+            })
+
+            .catch(err =>{
+                console.log(err);
+            })
+
+        },
+
+        actorsAdd(ele){
+          this.thisPosterActor = ele
         },
         clickedAdd(ele){
           if(!this.myList.includes(ele)){
@@ -177,8 +222,12 @@ export default {
             this.thisPoster = []
             this.search = 'all'
             this.getApi();
-          } else if (ele == 'list'){
+          } else if (ele == 'attori') {
+            this.thisGenre = 'attori'
+            this.myListActive = false
+          }else if (ele == 'list'){
             this.myListActive = true
+            this.thisGenre = 'list'
           }
 
         },

@@ -1,11 +1,11 @@
 <template>
-  <div class="col">
+  <div class="colAttori">
       <!-- Movie -->
       <ul>
-          <li @click="$emit('addFilm',ele)"
+          <li @click="$emit('addActor',ele)"
           v-for="(ele,index) in filmsArray"
           :key="index">
-              <img :src="`${urlImg}${ele.poster_path}`" alt="">
+              <img :src="`${urlImg}${ele.profile_path}`" alt="">
           </li>
       </ul>
   </div>
@@ -40,7 +40,8 @@ ul{
     margin-top: 30px;
     overflow-x: auto;
     align-items: center;
-   padding: 0px 20px;
+    padding: 0px 20px;
+   
 
     li{
         min-width: calc(100% / 8 - 10px);

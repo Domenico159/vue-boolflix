@@ -5,13 +5,15 @@
       <div class="logo">
           <img src="../assets/img/logoNetflix.png" alt="">
           <div class="type">
-              <span @click="$emit('clickHome','home')"
+              <span @click="$emit('clickNav','home')"
               >Home</span>
-              <span @click="$emit('clickMovie','movie')"
+              <span @click="$emit('clickNav','movie')"
               >Films</span>
-              <span  @click="$emit('clickTv','serie-TV')"
+              <span  @click="$emit('clickNav','serie-TV')"
               >Serie Tv</span>
-              <span  @click="$emit('clickList','list')"
+              <span  @click="$emit('clickNav','attori')"
+              >Attori</span>
+              <span  @click="$emit('clickNav','list')"
               >La mia lista</span>
           </div>
       </div>
