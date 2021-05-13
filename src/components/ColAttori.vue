@@ -7,6 +7,7 @@
           :key="index">
               <img v-if="ele.profile_path != undefined" :src="`${urlImg}${ele.profile_path}`" alt="">
               <img v-else src="@/assets/img/poster-placeholder.png" alt="">
+              <h2>{{ele.media_type == 'movie' ? ele.title : ele.name }}</h2>
           </li>
       </ul>
   </div>
@@ -36,8 +37,8 @@ export default {
 ul{
     display: flex;
     list-style: none;
-    min-height: 350px;
-    max-height: 350px;
+    min-height: 450px;
+    max-height: 450px;
     margin-top: 30px;
     overflow-x: auto;
     align-items: center;
@@ -53,6 +54,38 @@ ul{
         height: 220px;
 
 
+         h2{
+            color: $text-primary;
+            position: absolute;
+            font-size: 20px;
+            top: 30px;
+            left: 0px;
+            padding: 5px;
+            opacity: 0;
+            min-width: 300px;
+            }
+
+            
+            
+
+      
+       &:hover h2{
+           animation: textEffect 0.5s forwards;
+       }
+
+
+       @keyframes textEffect {
+                0%{
+                    top: 30px;
+                    opacity: 0;
+                }
+
+                100%{
+                    top:-85px;
+                    opacity: 1;
+                    z-index: 10;
+                }
+       }
        
 
         &:hover img{

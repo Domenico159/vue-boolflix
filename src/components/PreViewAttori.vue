@@ -96,9 +96,9 @@ export default {
             position: absolute;
             font-size: 20px;
             top: 30px;
-            left: 50px;
-            padding: 5px;
+            left: -120px;
             opacity: 0;
+            min-width: 800px;
             }
 
             
@@ -117,9 +117,9 @@ export default {
                 }
 
                 100%{
-                    top:-85px;
+                    top:-68px;
                     opacity: 1;
-                    z-index: 10;
+                    z-index: 8;
                 }
        }
        
