@@ -4,6 +4,7 @@
     <Navbar
     @keyUp="thisTextClicked"
     @clickNav="changeGender"
+    :genre="thisGenre"
     />
 
     <h1  

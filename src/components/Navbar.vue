@@ -17,14 +17,17 @@
               >La mia lista</span>
           </div>
       </div>
-      <div class="search">
-          <span><i @click="clickSearch"
+      <div 
+      class="search">
+          <span v-if="genre != 'attori'"
+          ><i @click="clickSearch"
           class="fas fa-search"></i></span>
           <input :class="{in:iconStatus, out:iconStatus == false}"
           class="text"
            placeholder="Search:"
+           ref="newText"
            @keyup="$emit('keyUp', searchText)"
-          v-model="searchText" text="">
+          v-model.trim="searchText" text="">
           <div class="notifiche">
               <i class="fas fa-bell"></i>
               <i class="fas fa-gift"></i>
@@ -56,6 +59,7 @@
 <script>
 export default {
    name:'Navbar',
+   props:['genre'],
    data(){
        return {
            searchText:'',
@@ -66,6 +70,8 @@ export default {
    methods:{
        clickSearch(){
            this.iconStatus = !this.iconStatus
+            this.$refs.newText.focus()
+
        },
        infoUser(){
            this.clickInfoUser = !this.clickInfoUser

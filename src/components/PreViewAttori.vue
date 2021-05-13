@@ -43,13 +43,14 @@ export default {
             language:'',
             statusTextEffect:false,
             thisPoster:[],
+            thisFilmActor:[],
         }
     },
     methods:{
         addPoster(ele){
             this.thisPoster = ele
             console.log(ele);
-        }
+        },
     },
 }
 </script>
