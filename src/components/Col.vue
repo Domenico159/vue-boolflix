@@ -5,7 +5,8 @@
           <li @click="$emit('addFilm',ele)"
           v-for="(ele,index) in filmsArray"
           :key="index">
-              <img :src="`${urlImg}${ele.poster_path}`" alt="">
+              <img v-if="ele.poster_path != undefined" :src="`${urlImg}${ele.poster_path}`" alt="">
+              <img v-else src="@/assets/img/poster-placeholder.png" alt="">
           </li>
       </ul>
   </div>

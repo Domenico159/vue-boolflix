@@ -52,7 +52,7 @@
 
 <script>
 export default {
-    name:'PreView',
+    name:'PreViewFilmAttori',
     props:['poster','genre','effectAdd'],
     data(){
         return {
