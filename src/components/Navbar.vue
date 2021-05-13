@@ -76,8 +76,7 @@ export default {
        },
         navResIn(){
            this.iconStatus = undefined
-       }
-
+       },
    },
 }
 </script>

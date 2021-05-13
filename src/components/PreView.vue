@@ -2,8 +2,8 @@
   <div class="pre-view">
       <div class="text">
           <div class="info">
-                  <h1>{{genre == 'movie' ? poster.title : poster.name }}</h1>
-                  <h2>{{genre == 'movie' ? poster.original_title : poster.original_name }}</h2>
+                  <h1>{{poster.media_type == 'movie' ? poster.title : poster.name }}</h1>
+                  <h2>{{poster.media_type == 'movie' ? poster.original_title : poster.original_name }}</h2>
                   <img  v-if="poster.original_language == 'en'" src="@/assets/img/flags-boolflix/en.png" alt="">
                   <img  v-else-if="poster.original_language == 'it'" src="@/assets/img/flags-boolflix/it.png" alt="">
                   <h2 v-else>Lingua : {{poster.original_language}}</h2>
@@ -17,7 +17,20 @@
                   ></i>
                  </div>
                   <h2>{{ poster.popularity }}</h2>
+                  <div class="like">
+                     <i class="fas fa-thumbs-up"></i>
+                     <i class="fas fa-thumbs-down"></i>
                  </div>
+                 <div 
+                 @click="$emit('clickIconAdd',poster)"
+                 class="addListItem">
+                 <i 
+                 class="fas fa-plus"></i><span>Aggiungi alla lista</span>
+                 <span :class="{in:effectAdd}"
+                 class="addText">Aggiunto</span>
+                 </div>
+                 </div>
+                 <h2 class="mediaType">{{ poster.media_type }}</h2>
                  <div class="adult-or-child">
                      <i :class="{adult:poster.adult}"
                      class="fas fa-user-circle"></i>
@@ -27,15 +40,7 @@
                      <p>{{ poster.overview }}</p>
                  </div>
                   </div>
-                 <div 
-                 @click="$emit('clickIconAdd',poster)"
-                 class="addListItem">
-                 <i class="fas fa-plus"></i><span>Aggiungi alla lista</span>
-                 </div>
-                 <div class="like">
-                     <i class="fas fa-thumbs-up"></i>
-                     <i class="fas fa-thumbs-down"></i>
-                 </div>
+                 
       </div>
       <div class="imgPoster">
            <img :src="`${urlImg}${poster.poster_path}`" alt="">
@@ -46,11 +51,12 @@
 <script>
 export default {
     name:'PreView',
-    props:['poster','genre'],
+    props:['poster','genre','effectAdd'],
     data(){
         return {
             urlImg:'https://image.tmdb.org/t/p/original',
             language:'',
+            statusTextEffect:false,
         }
     },
 }
@@ -72,12 +78,20 @@ export default {
         position: relative;
         overflow-y: auto;
 
+        .mediaType{
+                background: brown;
+                padding: 5px;
+                border-radius:10px ;
+                min-width: 40px;
+                text-align: center;
+                max-width: 80px;
+                text-transform: uppercase;
+            }
+
         .like{
             display: flex;
             align-items:center ;
-            position: absolute;
-            left: 220px;
-            top:130px;
+            margin-left: 40px;
 
             .fa-thumbs-up{
                 color: rgb(15, 172, 15);
@@ -99,6 +113,7 @@ export default {
             align-items: center;
             margin-bottom: 15px;
 
+
             h2{
                 transform: translateY(10px);
                 margin-left: 15px;
@@ -117,6 +132,37 @@ export default {
             align-items: center;
             right: 50px;
             top: 100px;
+
+            .addText{
+                position: absolute;
+                bottom: 0px;
+                color:#db1927 ;
+                right: 30px;
+                font-weight: 600;
+                font-size: 28px;
+                display: inline-block;
+                visibility: hidden;
+            }
+
+            .addText.in{
+                animation: addTextEffect-in 1.5s forwards;
+            }
+
+            @keyframes addTextEffect-in  {
+                0%{
+                    bottom: 0px;
+                    visibility: visible;
+                }
+
+                90%{
+                    bottom: 50px;
+                }
+                100%{
+                    visibility: hidden;
+                    opacity: 0;
+                }
+            }
+            
 
             i{
                 margin-right: 15px;

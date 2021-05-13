@@ -15,6 +15,7 @@
     <PreView v-show=" thisPoster.length != 0 "
      @clickIconAdd="clickedAdd"
      :genre="thisGenre"
+     :effectAdd="statusEffectAdd"
     :poster="thisPoster"
      v-if="!myListActive"
      />
@@ -35,7 +36,7 @@
    <h1 v-if="!myList.length == 0"
    >La tua lista</h1>
    <h1 v-else
-   >Non hai scelto film da salvare</h1>
+   >Non hai nulla salvato</h1>
    <Mylist @removeItemList="removeListItem"
    :genre="thisGenre"
    :listItem="myList"
@@ -64,7 +65,7 @@ export default {
   data(){
     return {
       apiUrl:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&language=it-IT',
-      apiHome1:'https://api.themoviedb.org/3/search/movie?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=a&language=it-IT',
+      apiHome1:'https://api.themoviedb.org/3/trending/all/day?api_key=6425bcca50e476d0d6befdd1409e6aa5',
       apiSerie:'https://api.themoviedb.org/3/search/tv?api_key=6425bcca50e476d0d6befdd1409e6aa5&query=all&language=it-IT',
       films:[],
       home:[],
@@ -74,6 +75,7 @@ export default {
       libreria:'home',
       myListActive:false,
       thisPoster:[],
+      statusEffectAdd:false,
     }
   },
   created(){
@@ -115,10 +117,12 @@ export default {
         clickedAdd(ele){
           if(!this.myList.includes(ele)){
             this.myList.push(ele)
+            this.statusEffectAdd = true
           }
         },
         addFilms(ele){
           this.thisPoster = ele
+           this.statusEffectAdd = false
         },
 
         removeListItem(index){
