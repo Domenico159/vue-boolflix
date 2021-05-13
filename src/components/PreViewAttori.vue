@@ -79,11 +79,11 @@ export default {
     margin-top: 30px;
     overflow-x: auto;
     align-items: center;
-    padding: 0px 20px;
+    padding: 0px 100px;
 
     li{
-        min-width: calc(100% / 4 - 10px);
-        max-width: calc(100% / 4 - 10px);
+        min-width: 350px;
+        max-width: 350px;
         position: relative;
         cursor: pointer;
         margin: 20px 5px;
@@ -126,7 +126,7 @@ export default {
 
         &:hover img{
             position: relative;
-            transform: scale(1.4);
+            transform: scale(1.3);
             z-index: 9;
             height: auto;
             
