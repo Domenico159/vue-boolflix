@@ -51,6 +51,8 @@ ul{
         cursor: pointer;
         margin: 20px 5px;
         height: 220px;
+
+
        
 
         &:hover img{

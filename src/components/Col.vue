@@ -8,6 +8,8 @@
               <img v-if="ele.backdrop_path != undefined" :src="`${urlImg}${ele.backdrop_path}`" alt="">
               <img v-else-if="ele.poster_path != undefined" :src="`${urlImg}${ele.poster_path}`" alt="">
               <img v-else src="@/assets/img/poster-placeholder.png" alt="">
+
+            <h2>{{ele.media_type == 'movie' ? ele.title : ele.name }}</h2>
           </li>
       </ul>
   </div>
@@ -37,8 +39,8 @@ export default {
 ul{
     display: flex;
     list-style: none;
-    min-height: 350px;
-    max-height: 350px;
+    min-height: 400px;
+    max-height: 400px;
     margin-top: 30px;
     overflow-x: auto;
    align-items: center;
@@ -51,7 +53,38 @@ ul{
         cursor: pointer;
         margin: 20px 5px;
         height: 220px;
-       
+
+        h2{
+            color: $text-primary;
+            position: absolute;
+            font-size: 20px;
+            top: 30px;
+            left: 50px;
+            padding: 5px;
+            opacity: 0;
+            }
+
+            
+            
+
+      
+       &:hover h2{
+           animation: textEffect 0.5s forwards;
+       }
+
+
+       @keyframes textEffect {
+                0%{
+                    top: 30px;
+                    opacity: 0;
+                }
+
+                100%{
+                    top:-85px;
+                    opacity: 1;
+                    z-index: 10;
+                }
+       }
 
         &:hover img{
             position: relative;
