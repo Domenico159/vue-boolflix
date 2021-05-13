@@ -47,8 +47,8 @@ ul{
    padding: 0px 20px;
 
     li{
-        min-width: calc(100% / 4 - 10px);
-        max-width: calc(100% / 4 - 10px);
+        min-width:350px ;
+        max-width:350px ;
         position: relative;
         cursor: pointer;
         margin: 20px 5px;
